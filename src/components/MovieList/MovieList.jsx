@@ -13,10 +13,8 @@ function MovieList() {
 
     const handleDetails = (movie) => {
         console.log(movie);
-        dispatch({
-            type: 'SAVE_DETAILS',
-            payload: movie
-        })
+        dispatch({ type: 'SAVE_DETAILS', payload: movie})
+        dispatch({type: 'FETCH_GENRES', payload: movie.id})
         history.push('/details')
     }
     return (

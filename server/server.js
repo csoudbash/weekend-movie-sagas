@@ -10,8 +10,8 @@ app.use(bodyParser.json()); // needed for angular requests
 app.use(express.static('build'));
 
 /** ---------- ROUTES ---------- **/
-app.use('/api/movie', movieRouter);
-app.use('/api/genre', genreRouter)
+app.use('/api/movie', movieRouter); // router containing GET and POST for getting and adding movies
+app.use('/api/genre', genreRouter) // router containing GET for the genres for the movie selected on the DOM in the MovieList component
 
 /** ---------- START SERVER ---------- **/
 app.listen(port, function () {

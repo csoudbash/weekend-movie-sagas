@@ -11,14 +11,13 @@ import createSagaMiddleware from 'redux-saga';
 import { takeEvery, put } from 'redux-saga/effects';
 import axios from 'axios';
 
-// Create the rootSaga generator function
-function* rootSaga() {
-    yield takeEvery('FETCH_MOVIES', fetchAllMovies);
-    yield takeEvery('FETCH_GENRES', fetchGenre);
+
+function* rootSaga() { // saga functions
+    yield takeEvery('FETCH_MOVIES', fetchAllMovies); // saga for grabbing the list of movies from the database run on page load of the MoviesList component
+    yield takeEvery('FETCH_GENRES', fetchGenre); // saga for grabbing the list lf genres asscociated with the selected movie from the Deatils component
 }
 
-function* fetchAllMovies() {
-    // get all movies from the DB
+function* fetchAllMovies() { // get all movies from the database
     try {
         const movies = yield axios.get('/api/movie');
         console.log('get all:', movies.data);
@@ -73,9 +72,9 @@ const details = (state = {}, action) => {
 // Create one store that all components can use
 const storeInstance = createStore(
     combineReducers({
-        movies,
-        genres,
-        details,
+        movies, // storing the movies grabbed for the database on page load of the home or MovieList component
+        genres, // storing the genres grabbed from the database so that we can refer to them in the Details component
+        details, // storing the details of the selected movie from the movieList component and allowing us to use that data on the Details component
     }),
     // Add sagaMiddleware to our store
     applyMiddleware(sagaMiddleware, logger),

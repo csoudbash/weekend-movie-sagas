@@ -7,14 +7,14 @@ console.log(req.params.id);
 let id = req.params.id;
 console.log(id)
   // Add query to get all genres
-  const queryText=`select genres.name
-  from movies
-  join movies_genres
-  on movies.id = movies_genres.movie_id
-  join genres
-  on genres.id = movies_genres.genre_id
-  where movies.id = $1
-  group by movies.title, genres.name;`
+  const queryText=`SELECT genres.name
+  FROM movies
+  JOIN movies_genres
+  ON movies.id = movies_genres.movie_id
+  JOIN genres
+  ON genres.id = movies_genres.genre_id
+  WHERE movies.id = $1
+  GROUP BY movies.title, genres.name;`
   pool.query(queryText, [id])
     .then((result) => {
       res.send(result.rows);

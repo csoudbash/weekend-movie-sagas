@@ -1,22 +1,16 @@
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { useEffect } from 'react';
-
-
 
 function Details() {
 
-useEffect(() => {
 
-})
+    const movie = useSelector(store => store.details)// referencing store that has the details of the movie we clicked on in the movielist view
+    const genres = useSelector(store => store.genres)// referencing store that has the details of the movie genres grabbed from the database and stored in a reducer
+    const history = useHistory(); // tying invoked useHistory to a variable we can then push to in order to change between views
+   
 
-    const movie = useSelector(store => store.details)
-    const genres = useSelector(store => store.genres)
-    const history = useHistory();
-    console.log(genres);
-    const handleBack = () => {
-
-        history.push('/')
+    const handleBack = () => {// when back button is clicked, run handleBack function
+        history.push('/') // switching to the movielist component to render on the DOM
     }
 
     return (
